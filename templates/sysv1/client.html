@@ -1,0 +1,157 @@
+{include file="header.tpl.html"}
+{include file="side.tpl.html"}
+{literal}
+<script type="text/javascript">
+$(document).ready(function(){
+    $("input[name='updateclient']").click(function(){
+        if($("input[name='cabbr']").val()==""){
+            alert("客户代码不能为空！");
+            return false;
+        }else if($("input[name='cname']").val()==""){
+            alert("客户姓名不能为空！");
+            return false;
+        }
+    });
+    $("input[name='addclient']").click(function(){
+        if($("input[name='cabbr']").val()==""){
+            alert("客户代码不能为空！");
+            return false;
+        }else if($("input[name='cname']").val()==""){
+            alert("客户姓名不能为空！");
+            return false;
+        }
+    });
+});
+</script>
+{/literal}
+{if $ifupdatec=="1"}
+<div class="main_title">修改基本信息</div>
+<div class="client">
+<form method="POST">
+<table class="inputtab">
+<tr>
+  <td>代码：</td>
+  <td><input type="text" size="20" name="cabbr" value="{$cabbr1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>姓名</td>
+  <td><input type="text" size="20" name="cname" value="{$cname1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>职位：</td>
+  <td><input type="text" size="20" name="ctitle" value="{$ctitle1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>公司：</td>
+  <td><input type="text" size="20" name="ccom" value="{$ccom1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>电话：</td>
+  <td><input type="text" size="20" name="ctel" value="{$ctel1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>地址：</td>
+  <td><input type="text" size="20" name="caddr" value="{$caddr1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>城市：</td>
+  <td><input type="text" size="20" name="ccity" value="{$ccity1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>添加时间：</td>
+  <td><input type="text" size="20" name="crtime" value="{$crtime1}" readonly></td>
+  <td></td>
+</tr>
+<tr><td colspan=2><hr></td></tr>
+<tr>
+  <td><input type="submit" name="updateclient" value="更新客户"></td>
+  <td></td>
+  <td></td>
+</tr>
+</table>
+</form>
+</div>
+{else if $ifupdatec=="2"}
+<div class="main_title">添加客户</div>
+<div class="client">
+<form method="POST">
+<table class="inputtab">
+<tr>
+  <td>代码：</td>
+  <td><input type="text" size="20" name="cabbr"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>姓名：</td>
+  <td><input type="text" size="20" name="cname"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>职位：</td>
+  <td><input type="text" size="20" name="ctitle"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>公司：</td>
+  <td><input type="text" size="20" name="ccom"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>电话：</td>
+  <td><input type="text" size="20" name="ctel"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>地址：</td>
+  <td><input type="text" size="20" name="caddr"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>城市：</td>
+  <td><input type="text" size="20" name="ccity"></td>
+  <td></td>
+</tr>
+<tr><td colspan=2><hr></td></tr>
+<tr>
+  <td><input type="submit" name="addclient" value="添加客户"></td>
+  <td></td>
+  <td></td>
+</tr>
+</table>
+</form>
+</div>
+{else}
+<div class="main_title"><a href="?addc=1">添加客户</a></div>
+<div class="client">
+<table cellpadding="1" border="1" rules="all" class="alltab">
+<tr>
+  <th>英文简称</th>
+  <th>客户姓名</th>
+  <th>职位</th>
+  <th>公司</th>
+  <th>电话</th>
+  <th>城市</th>
+</tr>
+{section name=c loop=$c_list}
+<tr>
+  <td><a href="?updatecid={$c_list[c].cid}">{$c_list[c].cabbr}</a></td>
+  <td>{$c_list[c].cname}</td>
+  <td>{$c_list[c].ctitle}</td>
+  <td>{$c_list[c].ccom}</td>
+  <td>{$c_list[c].ctel}</td>
+  <td>{$c_list[c].ccity}</td>
+</tr>
+{/section}
+</table>
+<div id="pagenav">{$pagenav}</div>
+</div>
+{/if}
+</div>
+{include file="footer.tpl.html"}

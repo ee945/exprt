@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>打印快递单</title>
+<script type="text/javascript" src="common/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("button#print").click(function(){
+        $("div#hide").hide();
+    });
+});
+</script>
+<style type="text/css">
+body {
+  font-size:18px;
+}
+#rnum {
+  position: absolute;
+  left:600px;
+  top: 50px;
+}
+</style>
+</head>
+<body>
+<div id="hide">
+<form method="post">
+打印模板：
+<input type="radio" name="excom" value="STO" onClick="javascript:this.form.submit();" />申通
+<input type="radio" name="excom" value="WB" onClick="javascript:this.form.submit();" />万邦
+</form>
+<a href='javascript:window.print()'><button id="print">打印万邦</button></a>
+</div>
+<div id="rnum">{$rnum}</div>
+<div id="rexcom">{$rexcom}</div>
+<div id="rname">{$rname}</div>
+<div id="rtitle">{$rtitle}</div>
+<div id="rcom">{$rcom}</div>
+<div id="rtel">{$rtel}</div>
+<div id="raddr">{$raddr}</div>
+<div id="rcity">{$rcity}</div>
+<div id="sname">{$sname}</div>
+<div id="scom">{$scom}</div>
+<div id="stel">{$stel}</div>
+<div id="saddr">{$saddr}</div>
+<div id="scity">{$scity}</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{include file="header.tpl.html"}
+{include file="side.tpl.html"}
+<div class="main_title">搜索快递记录：
+</div>
+<div id="searchlist">
+<div id="searchbar"><form method="get"><input type="text" name="searchnum"><input type="submit" value="搜索"></form></div>
+<div>{$noresult}</div>
+{if $found=="1"}
+<ul id="searchrs">
+<li><span>快递单号：</span><span>{$rnum}</span></li>
+<li><span>快递公司：</span><span>{$rcom}</span></li>
+<li><span>发件时间：</span><span>{$rstime}</span></li>
+<li><span>客户姓名：</span><span>{$rname}</span></li>
+<li><span>收件电话：</span><span>{$rtel}</span></li>
+<li><span>收件地址：</span><span>{$raddr}</span></li>
+</ul>
+{/if}
+</div>
+</div>
+{include file="footer.tpl.html"}

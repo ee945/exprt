@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>EXPRINTER</title>
+<script type="text/javascript" src="common/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="common/datepicker.js"></script>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="style/reset.css" rel="stylesheet" type="text/css"/>
+<link href="style/style.css" rel="stylesheet" type="text/css"/>
+<link href="style/datepicker.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="wrap">
+<div id="top">
+<div id="topleft"><a href="index.php"><img src="images/banner.png"></a></div>
+<div id="topright">
+<span class="topico"><a href="admin/index.php" target=_blank><img src="images/ico_admin.png"></a></span>
+<span class="topico"><img src="images/ico_user.png"></span>
+<span class="topico"><A onClick="return confirm('提示：您确定要退出系统吗？')" href="index.php?action=logout"  target=_parent><img src="images/ico_exit.png"></A></span>
+</div>
+</div>
+<div id="menu">
+<div id="login">
+{if $uname==""}
+<form method="POST">
+用户：<input class="form_login" type="text" size=11 name="uname"> | 密码：<input class="form_login" type="password" size=11 name="upass">&nbsp;
+<input class="btn_login" type="submit" name="submit" value="登录">
+</form>
+{else}
+<span style="font-size:1em;">{$smarty.now|date_format:'%Y-%m-%d %H:%M'}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您好：{$uname}
+{/if}
+</div>
+<div id="menulist">
+<ul>
+<li><a href="index.php">首页</a></li>
+<li><a href="xls.php">备份</a></li>
+<li>关于</li>
+</ul>
+</div>
+</div>
+<div id="sidewrap">

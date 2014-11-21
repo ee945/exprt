@@ -1,0 +1,337 @@
+{include file="header.tpl.html"}
+{include file="side.tpl.html"}
+{literal}
+<script type="text/javascript">
+$(document).ready(function(){
+    $("input#addcabbr").blur(function(){
+        var cabbr = $("input#addcabbr").val();
+        $.getJSON("cquery.php",{cabbr:cabbr},function(json){
+            $("input#addcname").val(json.cname);
+            $("input#addctitle").val(json.ctitle);
+            $("input#addccom").val(json.ccom);
+            $("input#addctel").val(json.ctel);
+            $("input#addcaddr").val(json.caddr);
+            $("input#addccity").val(json.ccity);
+        });
+    });
+    $("input[name='updaterecord']").click(function(){
+        if($("input[name='rnum']").val()==""){
+            alert("快递单号不能为空！");
+            return false;
+        }else if($("input[name='rname']").val()==""){
+            alert("收件人不能为空！");
+            return false;
+        }
+    });
+    $("input[name='addrecord']").click(function(){
+        if($("input[name='rnum']").val()==""){
+            alert("快递单号不能为空！");
+            return false;
+        }else if($("input[name='rname']").val()==""){
+            alert("收件人不能为空！");
+            return false;
+        }
+    });
+    $("button#del").click(function(){
+        if(confirm("确认删除？")==false){
+            return false;
+        }
+    });
+});
+onload = function () {
+new DatePicker('start_', {  //实例化对象名称：开始日期
+        inputId: 'date_start',  //日期输入框ID
+        className: 'date-picker-wp',  //CSS类名
+        seprator: '-'  //日期分隔符 （年-月-日）
+    });
+new DatePicker('end_', {  //实例化对象名称：结束日期
+        inputId: 'date_end',
+        className: 'date-picker-wp',
+        seprator: '-'
+    });
+}
+</script>
+{/literal}
+{if $ifupdater=="1"}
+<!-- <div class="main_title">修改快递记录</div> -->
+<div class="record">
+<form method="POST">
+<table class="inputtab">
+<!-- 更新基本快递信息部分 -->
+<tr>
+  <td>快递单号：</td>
+  <td><input type="text" size="20" name="rnum" value="{$rnum1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>快递公司：</td>
+  <td><input type="text" size="20" name="rexcom" value="{$rexcom1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>发件类别：</td>
+  <td><input type="text" size="20" name="rcata" value="{$rcata1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>发件内容：</td>
+  <td><input type="text" size="20" name="rcont" value="{$rcont1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>发件日期：</td>
+  <td><input type="text" size="20" name="rstime" value="{$rstime1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>备注：</td>
+  <td>
+  <textarea name="remark" rows="5" cols="30">{$remark1}</textarea>
+  </td>
+  <td></td>
+</tr>
+<tr><td colspan=3><hr></td></tr>
+</table>
+<div style="float:left;">
+<table class="inputtab_r">
+<!-- 更新收件人信息部分 -->
+<tr>
+  <td>收件姓名</td>
+  <td><input type="text" size="20" name="rname" value="{$rname1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>收件人职位：</td>
+  <td><input type="text" size="20" name="rtitle" value="{$rtitle1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>收件公司：</td>
+  <td><input type="text" size="20" name="rcom" value="{$rcom1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>收件电话：</td>
+  <td><input type="text" size="20" name="rtel" value="{$rtel1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>收件地址：</td>
+  <td><input type="text" size="20" name="raddr" value="{$raddr1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>收件城市：</td>
+  <td><input type="text" size="20" name="rcity" value="{$rcity1}"></td>
+  <td></td>
+</tr>
+</table>
+</div>
+<!-- 更新发件人信息 -->
+<div style="float:left;">
+<table class="inputtab_s">
+<tr>
+  <td>发件姓名：</td>
+  <td><input type="text" size="20" name="sname" value="{$sname1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>发件公司：</td>
+  <td><input type="text" size="20" name="scom" value="{$scom1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>发件电话：</td>
+  <td><input type="text" size="20" name="stel" value="{$stel1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>发件地址：</td>
+  <td><input type="text" size="20" name="saddr" value="{$saddr1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>发件城市：</td>
+  <td><input type="text" size="20" name="scity" value="{$scity1}"></td>
+  <td></td>
+</tr>
+</table>
+</div>
+<div style="clear:both;">
+<table class="inputtab">
+<tr><td colspan=3><hr></td></tr>
+<tr>
+  <td><input type="submit" name="updaterecord" value="更新记录"></td>
+  <td></td>
+  <td></td>
+</tr>
+</table>
+</div>
+</form>
+</div>
+{else if $ifupdater=="2"}
+<!-- <div class="main_title">添加记录</div> -->
+<div class="record">
+<form method="POST">
+<table class="inputtab">
+<!-- 添加基本信息部分 -->
+<tr>
+  <td>快递单号：</td>
+  <td><input type="text" size="20" name="rnum"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>快递公司：</td>
+  <td><select name="rexcom">
+  <option selected="selected" value="申通">申通</option>
+  <option value="万邦">万邦</option>
+  </select></td>
+  <td></td>
+</tr>
+<tr>
+  <td>发件类别：</td>
+  <td><input type="text" size="20" name="rcata"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>发件内容：</td>
+  <td><input type="text" size="20" name="rcont"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>备注：</td>
+  <td>
+  <textarea name="remark" rows="5" cols="30"></textarea>
+  </td>
+  <td></td>
+</tr>
+<tr><td colspan=3><hr></td></tr>
+</table>
+<!-- 添加收件人信息 -->
+<div style="float:left;">
+<table class="inputtab_r">
+<tr>
+  <td>收件人代码：</td>
+  <td><input id="addcabbr" type="text" size="4" name="cabbr"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>收件姓名</td>
+  <td><input id="addcname" type="text" size="20" name="rname" value="{$cname1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>收件人职位：</td>
+  <td><input id="addctitle" type="text" size="20" name="rtitle" value="{$ctitle1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>收件公司：</td>
+  <td><input id="addccom" type="text" size="20" name="rcom" value="{$ccom1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>收件电话：</td>
+  <td><input id="addctel" type="text" size="20" name="rtel" value="{$ctel1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>收件地址：</td>
+  <td><input id="addcaddr" type="text" size="20" name="raddr" value="{$caddr1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>收件城市：</td>
+  <td><input id="addccity" type="text" size="20" name="rcity" value="{$ccity1}"></td>
+  <td></td>
+</tr>
+</table>
+</div>
+<!-- 添加发件人信息 -->
+<div style="float:left;">
+<table class="inputtab_s">
+<tr>
+  <td>发件姓名：</td>
+  <td><input type="text" size="20" name="sname" value="{$uabbr1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>发件公司：</td>
+  <td><input type="text" size="20" name="scom" value="{$ucom1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>发件电话：</td>
+  <td><input type="text" size="20" name="stel" value="{$utel1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>发件地址：</td>
+  <td><input type="text" size="20" name="saddr" value="{$uaddr1}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>发件城市：</td>
+  <td><input type="text" size="20" name="scity" value="{$ucity1}"></td>
+  <td></td>
+</tr>
+</table>
+</div>
+<div style="clear:both;">
+<table class="inputtab">
+<tr><td colspan=3><hr></td></tr>
+<tr>
+  <td><input type="submit" name="addrecord" value="添加快递记录"></td>
+  <td></td>
+  <td></td>
+</tr>
+</table>
+</div>
+</form>
+</div>
+{else}
+<div class="main_title"><a href="?addr=1">添加记录</a></div>
+<div id="filter">
+<form method="POST">
+快递单号：<input type="text" name="s_num" size=12 />&nbsp;
+收件人：<input type="text" name="s_name" size=5 />&nbsp;
+收件公司：<input type="text" name="s_com" size=5 />&nbsp;
+发件时间：<input type="text" name="s_start" id="date_start" size=8 />--<input type="text" name="s_end" id="date_end" size=8 />&nbsp;
+<span><input type="submit" style="background:url(images/btn_search.png); width:45px; height:22px; border:0; padding:0;" value="" /></span>
+</form>
+</div>
+<div id="recordlist">
+<table cellspacing="0" cellpadding="1" border="1" rules="all" class="alltab">
+<tr>
+  <th>快递单号</th>
+  <th>快递公司</th>
+  <th>类别</th>
+  <th>内容</th>
+  <th>发件时间</th>
+  <th>收件人</th>
+  <th>收件公司</th>
+  <th>发件人</th>
+  <th style="text-align:center;">操作</th>
+</tr>
+{section name=r loop=$r_list}
+<tr>
+  <td><a href="?updaterid={$r_list[r].rid}">{$r_list[r].rnum}</a></td>
+  <td>{$r_list[r].rexcom}</td>
+  <td>{$r_list[r].rcata}</td>
+  <td>{$r_list[r].rcont}</td>
+  <td>{$r_list[r].rstime}</td>
+  <td>{$r_list[r].rname}</td>
+  <td>{$r_list[r].rcom}</td>
+  <td>{$r_list[r].sname}</td>
+  <td>
+  <a href="print.php?prid={$r_list[r].rid}" target="_blank"><button>打印</button></a>
+  <a href="?delrid={$r_list[r].rid}"><button id="del">删除</button></a>
+  </td>
+</tr>
+{/section}
+</table>
+<div id="pagenav">{$pagenav}</div>
+</div>
+{/if}
+</div>
+{include file="footer.tpl.html"}

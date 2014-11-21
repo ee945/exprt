@@ -1,0 +1,81 @@
+{include file="header.tpl.html"}
+{include file="side.tpl.html"}
+{literal}
+<script type="text/javascript">
+$(document).ready(function(){
+    $("input[name='updateuser']").click(function(){
+        if($("input[name='upass']").val()!=$("input[name='upassb']").val()){
+        alert("两次密码不一致！");
+        return false;
+        }else if($("input[name='uabbr']").val()==""){
+        alert("用户名不能为空！");
+        return false;
+        }
+    });
+});
+</script>
+{/literal}
+<div class="main_title">修改基本信息</div>
+<div id="userinfo">
+<form method="POST">
+<table class="inputtab">
+<tr>
+  <td>用户名：</td>
+  <td><input id="uname" type="text" size="20" name="uname" value="{$uname}" readonly></td>
+  <td></td>
+</tr>
+<tr>
+  <td>显示名称：</td>
+  <td><input id="uabbr" type="text" size="20" name="uabbr" value="{$uabbr}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>密码：</td>
+  <td><input type="password" size="20" name="upass"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>确认密码：</td>
+  <td><input type="password" size="20" name="upassb"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>公司：</td>
+  <td><input type="text" size="20" name="ucom" value="{$ucom}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>电话：</td>
+  <td><input type="text" size="20" name="utel" value="{$utel}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>地址：</td>
+  <td><input type="text" size="20" name="uaddr" value="{$uaddr}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>城市：</td>
+  <td><input type="text" size="20" name="ucity" value="{$ucity}"></td>
+  <td></td>
+</tr>
+<tr>
+  <td>注册时间：</td>
+  <td><input type="text" size="20" name="urtime" value="{$urtime}" readonly></td>
+  <td></td>
+</tr>
+<tr>
+  <td>上次登录：</td>
+  <td><input type="text" size="20" name="ultime" value="{$ultime}" readonly></td>
+  <td></td>
+</tr>
+<tr>
+  <td><input type="submit" name="updateuser" value="更新资料"></td>
+  <td></td>
+  <td></td>
+</tr>
+</table>
+</form>
+</div>
+</div>
+{include file="footer.tpl.html"}

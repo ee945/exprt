@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>打印快递单</title>
+<script type="text/javascript" src="common/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("button#print").click(function(){
+        $("div#hide").hide();
+        $("div#rnum").hide();
+    });
+});
+</script>
+<style type="text/css">
+body {
+  font-size:30px;
+}
+
+/*
+ * 快递单字段位置，单位 mm
+#rnum	{ position: absolute;	left:105px;	top: 18px;}
+#rname	{ position: absolute;	left:135px;	top: 27px;}
+#rcom	{ position: absolute;	left:145px;	top: 38px;}
+#rtel	{ position: absolute;	left:145px;	top: 65px;}
+#raddr	{ position: absolute;	left:120px;	top: 55px;}
+#rcity	{ position: absolute;	left:175px;	top: 27px;}
+#sname	{ position: absolute;	left:38px;	top: 27px;}
+#scom	{ position: absolute;	left:45px;	top: 38px;}
+#stel	{ position: absolute;	left:45px;	top: 65px;}
+#saddr	{ position: absolute;	left:22px;	top: 55px;}
+
+ * 快递单字段校准位置，单位 px，倍率 5.7 去上左间距50px */
+#rnum	{ position: absolute;	left:550px;	top: 53px;}
+#rname	{ position: absolute;	left:720px;	top: 104px;}
+#rcom	{ position: absolute;	left:760px;	top: 167px;}
+#rtel	{ position: absolute;	left:777px;	top: 321px;}
+#raddr	{ position: absolute;	left:634px;	top: 264px;}
+#rcity	{ position: absolute;	left:950px;	top: 104px;}
+#sname	{ position: absolute;	left:167px;	top: 104px;}
+#scom	{ position: absolute;	left:207px;	top: 167px;}
+#stel	{ position: absolute;	left:207px;	top: 321px;}
+#saddr	{ position: absolute;	left:75px;	top: 264px;}
+
+</style>
+</head>
+<body>
+<div id="hide">
+<form method="post">
+打印模板：
+<input type="radio" name="excom" value="STO" onClick="javascript:this.form.submit();" />申通
+<input type="radio" name="excom" value="WB" onClick="javascript:this.form.submit();" />万邦
+</form>
+<a href='javascript:window.print()'><button id="print">打印{$rexcom}</button></a>
+</div>
+<div id="rnum">{$rnum}</div>
+<div id="rname">{$rname}</div>
+<div id="rcom">{$rcom}</div>
+<div id="rtel">{$rtel}</div>
+<div id="raddr">{$raddr}</div>
+<div id="rcity">{$rcity}</div>
+<div id="sname">{$sname}</div>
+<div id="scom">{$scom}</div>
+<div id="stel">{$stel}</div>
+<div id="saddr">{$saddr}</div>
+
+
+</body>
+</html>

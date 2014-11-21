@@ -1,0 +1,14 @@
+<div id="login">
+{if $uname==""}
+<form method="POST">
+用户：<input type="text" size=11 name="uname"><br />
+密码：<input type="password" size=11 name="upass"><br />
+<input type="submit" name="submit" value="登录">
+</form>
+{else}
+您好：{$uname}</br></br>
+发件日期：</br>
+<span style="font-size:0.8em;">{$smarty.now|date_format:'%Y-%m-%d'}</span></br>
+<span style="padding-top:10px;display:block;"><A onClick="return confirm('提示：您确定要退出系统吗？')" href="index.php?action=logout"  target=_parent>退出</A></span>
+{/if}
+</div>
